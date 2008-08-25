@@ -1,0 +1,23 @@
+<html>
+<title>Advanced Template Markup - Goal Page</title>
+<head>
+<!-- Load the rules and helper functions. -->
+<script src='./template-wso-rules.js'></script>
+<script src='./template-wso.js'></script>
+<!-- Define some local variables. -->
+<script>
+	var rules = wso_data.rules;
+	var goal = "order_confirm";
+</script>
+</head>
+  <body>
+  	<!-- Debug information, for testing only. -->
+  	<script>
+	  document.write('</sc'+'ript><p>Debug Info : ' + debug(rules, "goal", "order_confirm") + '</p>');
+	</script>
+	<!-- The goal script -->
+	<script>
+	  goal_script(wso_data.rules, "order_confirm");
+	</script>
+  </body>
+</html>
