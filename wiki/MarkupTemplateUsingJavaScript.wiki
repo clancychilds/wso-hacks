@@ -2,7 +2,9 @@
 
 = Introduction =
 
-This page describes a technique by which the WSO control and tracking script can be conditionally loaded into a page.  This is useful in situations where there are multiple pages built from a single template - but where there is a requirement that only certain pages participate in the experiment.  This design uses JavaScript to insert the tracking script code at page load time, there is an [http://code.google.com/p/wso-hacks/wiki/MarkupTemplateUsingJSP alternative technique] which uses JSP technology to insert the tracking code on the serverside.
+This page describes a technique by which the WSO control and tracking script can be conditionally loaded into a page.  This is useful in situations where there are multiple pages built from a single template - but where there is a requirement that only certain pages participate in the experiment.  It also allows you to manage the development effort required to launch new tests as the template can be changed once and new experiments can be launched with only a configuration change.
+
+This design uses JavaScript to insert the tracking script code at page load time, there is an [http://code.google.com/p/wso-hacks/wiki/MarkupTemplateUsingJSP alternative technique] which uses JSP technology to insert the tracking code on the serverside.
 
 = The Code =
 
