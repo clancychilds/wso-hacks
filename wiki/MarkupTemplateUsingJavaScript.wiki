@@ -168,7 +168,7 @@ This file is an example of how the scripts described above can be used to select
 
 Try these links to see the design at work:
 
-  * [http://67.207.129.202/simonjsmith/wso/template/template.html?product=Product1 Product page, for a product for which there is an experiment defined.]
-  * [http://67.207.129.202/simonjsmith/wso/template/template.html?product=Product15 Product page, for a product where there is no corresponding experiment.]
-  * [http://67.207.129.202/simonjsmith/wso/template/template.html?product=Product1#utmxid=EAAAANQyrCw7jaZQCCgjvxgqzKU;utmxpreview=2-0-0-0 Using testing codes to Force a MV variation.]
+  * [http://wso-hacks.googlecode.com/svn/trunk/hacks/template-js/template.html?product=Product1 Product page, for a product for which there is an experiment defined.]
+  * [http://wso-hacks.googlecode.com/svn/trunk/hacks/template-js/template.html?product=Product15 Product page, for a product where there is no corresponding experiment.]
+  * [http://wso-hacks.googlecode.com/svn/trunk/hacks/template-js/template.html?product=Product1#utmxid=EAAAANQyrCw7jaZQCCgjvxgqzKU;utmxpreview=2-0-0-0 Using testing codes to Force a MV variation.]
     * Testing technique described [http://www.google.com/support/websiteoptimizer/bin/answer.py?hl=en&answer=63841 here]
