@@ -1,10 +1,10 @@
 #summary How to selectively markup a template page so that the WSO tags are only present on some pages.
 
-== Introduction ==
+= Introduction =
 
 This page describes a technique by which the WSO control and tracking script can be conditionally loaded into a page.  This is useful in situations where there are multiple pages built from a single template - but where there is a requirement that only certain pages participate in the experiment.  This design uses JavaScript to insert the tracking script code at page load time, there is an [http://code.google.com/p/wso-hacks/w/edit/MarkupTemplateUsingJSP alternative technique] which uses JSP technology to insert the tracking code on the serverside.
 
-== Code ==
+= The Code =
 
 The code supporting this design is here.  The two main scripts are:
 
@@ -55,7 +55,7 @@ function tracker_script(rules, key) {...
 function goal_script(rules, goal_name) {...
 }}}
 
-== Example ==
+= Example =
 
 There are two example HTML pages showing the required markup:
 
@@ -165,3 +165,7 @@ This file is an example of how the scripts described above can be used to select
   </body>
 </html>
 }}}
+
+Try these links to see the design at work:
+
+
