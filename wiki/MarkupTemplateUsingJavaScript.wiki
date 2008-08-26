@@ -8,7 +8,7 @@ This design uses JavaScript to insert the tracking script code at page load time
 
 = The Code =
 
-The code supporting this design is here.  The two main scripts are:
+The code supporting this design is [http://code.google.com/p/wso-hacks/source/browse/#svn/trunk/hacks/template-js here].  The two main scripts are:
 
   * template-wso-rules.js
   * template-wso.js
