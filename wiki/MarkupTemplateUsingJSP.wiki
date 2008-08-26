@@ -8,7 +8,7 @@ This design uses JSP code to insert the tracking script code om the serverside, 
 
 = The Code =
 
-The code supporting this design is here.  The two main files are:
+The code supporting this design is [http://code.google.com/p/wso-hacks/source/browse/#svn/trunk/hacks/template-jsp here].  The two main files are:
 
   * template-wso-rules.properties
 
