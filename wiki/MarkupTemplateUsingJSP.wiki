@@ -152,13 +152,35 @@ This file is an example of how the code described above can be used to selective
 This file is an example of how the code described above can be used to selectively markup the goal page.  The following is an extract showing the important markup required:
 
 {{{
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<html>
+<head>
+<title>Advanced Template Markup - Goal Page</title>
+<!-- Empty function definitions, ensures there are no JS errors should the WSO siteopt.js script not load. -->
+<script type="text/javascript">
+	function utmx_section(){}
+	function utmx(){}
+</script>
+<!-- Define some local variables. -->
+<%
+	String goal = "order_confirm";
+	wso.hacks.TemplateWso wso = new wso.hacks.TemplateWso(application.getResource("/WEB-INF/template-wso-rules.properties"));
+%>
+</head>
+<body>
+	<!-- Debug information, for testing only. -->
+	<p>Debug Info : <%=wso.debugGoal(goal)%></p>
 
-
+	<!-- The goal script -->
+	<%=wso.goalScript(goal)%>
+</body>
+</html>
 }}}
 
 Try these links to see the design at work:
 
-  * [http://67.207.129.202/simonjsmith/wso/template/template.html?product=Product1 Product page, for a product for which there is an experiment defined.]
-  * [http://67.207.129.202/simonjsmith/wso/template/template.html?product=Product15 Product page, for a product where there is no corresponding experiment.]
-  * [http://67.207.129.202/simonjsmith/wso/template/template.html?product=Product1#utmxid=EAAAANQyrCw7jaZQCCgjvxgqzKU;utmxpreview=2-0-0-0 Using testing codes to Force a MV variation.]
+  * [http://v1.simonjsmith.com:8180/WSO-Hacks-Jsp/template.jsp?product=Product1 Product page, for a product for which there is an experiment defined.]
+  * [http://v1.simonjsmith.com:8180/WSO-Hacks-Jsp/template.jsp?product=Product15 Product page, for a product where there is no corresponding experiment.]
+  * [http://v1.simonjsmith.com:8180/WSO-Hacks-Jsp/template.jsp?product=Product1#utmxid=EAAAANQyrCw7jaZQCCgjvxgqzKU;utmxpreview=2-0-0-0 Using testing codes to Force a MV variation.]
     * Testing technique described [http://www.google.com/support/websiteoptimizer/bin/answer.py?hl=en&answer=63841 here]
