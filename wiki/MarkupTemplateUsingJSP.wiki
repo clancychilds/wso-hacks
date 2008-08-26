@@ -101,7 +101,7 @@ This file is an example of how the code described above can be used to selective
 <!-- Define some local variables. -->
 <%
   String key = request.getParameter("product");
-  com.google.wso.TemplateWso wso = new com.google.wso.TemplateWso(application.getResource("/WEB-INF/template-wso-rules.properties"));
+  wso.hacks.TemplateWso wso = new wso.hacks.TemplateWso(application.getResource("/WEB-INF/template-wso-rules.properties"));
 %>
 </head>
   <body>
