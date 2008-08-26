@@ -90,7 +90,63 @@ There are two example JSPs showing the required markup:
 This file is an example of how the code described above can be used to selectively markup a page.  The following is an extract showing the important markup required:
 
 {{{
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<html>
+<head>
+<title>Advanced Template Markup - Test Page</title>
+<!-- Empty function definitions, ensures there are no JS errors should the WSO siteopt.js script not load. -->
+<script type="text/javascript">
+	function utmx_section(){}
+	function utmx(){}
+</script>
+<!-- Define some local variables. -->
+<%
+  String key = request.getParameter("product");
+  com.google.wso.TemplateWso wso = new com.google.wso.TemplateWso(application.getResource("/WEB-INF/template-wso-rules.properties"));
+%>
+</head>
+  <body>
+  	<!-- Debug information, for testing only. -->
+	<p>Debug Info : <%=wso.debugKey(key)%></p>
 
+	<!-- The control script -->
+	<%=wso.controlScript(key)%>
+
+    <div id="header">
+	<!-- Section script, exactly as defined in the WSO documentation. -->
+	<script>utmx_section("Header")</script>
+	Original Header Section
+	</noscript>
+	</div>
+
+    <div id="leftcol">
+	<!-- Section script, exactly as defined in the WSO documentation. -->
+	<script>utmx_section("Left")</script>
+	Original Left Section
+	</noscript>
+	</div>
+
+    <div id="content">
+	<!-- Section script, exactly as defined in the WSO documentation. -->
+	<script>utmx_section("Content")</script>
+	Original Content Section
+	<br>
+	<a href="./template-goal.jsp">Convert me!</a>
+	</noscript>
+	</div>
+
+    <div id="footer">
+	<!-- Section script, exactly as defined in the WSO documentation. -->
+	<script>utmx_section("Footer")</script>
+	Original Footer Section
+	</noscript>
+	</div>
+
+	<!-- The tracker script -->
+	<%=wso.trackerScript(key)%>
+  </body>
+</html>
 }}}
 
 ===template-goal.jsp===
