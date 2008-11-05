@@ -86,7 +86,7 @@ There are two steps to complete:
 The {{{utmx()}}} function is responsible for returning the variant of the test that the current visitor is seeing.  The output can be customised as described in the table.
 
 || *Function* || *Description* ||
-|| {{{utmx("variation_number", "section-name")}}} || Returns the number of the variation.  If the original was selected for this section, the 0 will be returned.  Otherwise, number 1 will be returned if the first alternative was selected for this section (MV or A/B).  Note that the section name for an A/B experiment is "A/B". ||
+|| {{{utmx("variation_number","section-name")}}} || Returns the number of the variation.  If the original was selected for this section, the 0 will be returned.  Otherwise, number 1 will be returned if the first alternative was selected for this section (MV or A/B).  Note that the section name for an A/B experiment is "A/B". ||
 || {{{utmx("combination")}}} || Returns the combination number selected for this visitor to the experiment.  This number is between 0 and N-1 inclusively, and will correspond with the combination numbers from the GWO front end. ||
 || {{{utmx("combination_string")}}} || Returns a string of the form "X-Y-Z" where the number of items separated by dashes is the count of the number of sections (1 in the case of an A/B experiment).  The numbers between the dashes are the numbers of the individual alternatives chose for each section.  The first number corresponds to the first section. ||
 
@@ -97,10 +97,10 @@ In addition, undefined can also be returned by any of these functions.  This imp
 These tags will add additional page views into your content report.  These page views essentially log relevant Website Optimizer events which occurred during the visitor's session.  The following table explains the events which are captured.
 
 || *Page* || *Description* ||
-||/gwo/1234567890/test/inactive||A visit to the test page by a visitor who is not participating in the experiment.  N.B. They will have seen the original content.||
-||/gwo/1234567890/test/0||A visit to the test page by a visitor who is participating in the experiment and saw the original content.||
-||/gwo/1234567890/test/1||A visit to the test page by a visitor who is participating in the experiment and saw combination 1.||
-||/gwo/1234567890/test/2||A visit to the test page by a visitor who is participating in the experiment and saw combination 2 etc...||
+|| {{{/gwo/1234567890/test/inactive}}} ||A visit to the test page by a visitor who is not participating in the experiment.  N.B. They will have seen the original content.||
+|| {{{/gwo/1234567890/test/0}}} ||A visit to the test page by a visitor who is participating in the experiment and saw the original content.||
+|| {{{/gwo/1234567890/test/1}}} ||A visit to the test page by a visitor who is participating in the experiment and saw combination 1.||
+|| {{{/gwo/1234567890/test/2}}} ||A visit to the test page by a visitor who is participating in the experiment and saw combination 2 etc...||
 
 ==Create the segments===
 
