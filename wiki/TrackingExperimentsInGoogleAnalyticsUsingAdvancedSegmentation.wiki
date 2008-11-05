@@ -118,6 +118,6 @@ Once the GWO events are being logged in your new GA profile, you should create c
 
   * Create a new custom segment.
   * Choose dimension: Page.
-  * Enter the appropriate value: e.g. {{{/gwo/1234567890/test/0}}}
+  * Enter the appropriate value: e.g. {{{/my/page.html?gwo_exp=1234567890&gwo_var=0}}}
   * Give it a descriptive name: e.g. {{{My Experiment : Original}}}
   * Save, and you are done!
