@@ -1,0 +1,66 @@
+#summary How to segment GA reports by GWO experiment / version.
+
+= Introduction =
+
+Add your content here.
+
+
+= The code =
+
+There are two steps to complete:
+
+  * Tag the experiment page.
+  * Create the custom segments in GA.
+
+===Tag the experiment page===
+
+
+*If using ga.js*
+{{{
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? " https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js ' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  var firstTracker = _gat._getTracker("UA-xxxxx-x");
+  firstTracker._initData();
+  firstTracker._trackPageview();
+  firstTracker._trackPageview("/zzzzzzzzzz/zzzz/" + utmx());
+
+  var secondTracker = _gat._getTracker("UA-yyyyy-y");
+  secondTracker._initData();
+  secondTracker._trackPageview("/zzzzzzzzzz/zzzz");
+</script>
+}}} 
+
+*If using urchin.js*
+{{{
+<script>
+  if(typeof(urchinTracker)!='function')document.write('<sc'+'ript src="'+
+'http'+(document.location.protocol=='https:'?'s://ssl':'://www')+
+'.google-analytics.com/urchin.js'+'"></sc'+'ript>')
+</script>
+<script>
+  _uacct = 'UA-xxxxx-x';
+  urchinTracker();
+  urchinTracker("/zzzzzzzzzz/zzzz/" + utmx());
+
+  _uacct = 'UA-yyyyy-y';
+  urchinTracker("/zzzzzzzzzz/zzzz/");
+</script>
+}}}
+
+These tags will add additional page views into your content report.  The following table describes the events.
+
+||Page||Description||
+||/1234567890/test/||A visit to the test page with the test disabled||
+||/1234567890/test/0-0-0||A visit to the test page with original content||
+||/1234567890/test/0-1-1||A visit to the test page with original content||
+||/1234567890/test/0-1-1||A visit to the test page with original content||
+
+
+
+
+===Create the segments===
+
+
