@@ -111,7 +111,3 @@ Once the GWO events have been logged in GA, you should create custom segments fo
   * Enter the appropriate value: e.g. {{{/gwo/1234567890/test/0}}}
   * Give it a descriptive name: e.g. {{{My Experiment : Original}}}
   * Save, and you are done!
-
-The image below describes the process.
-
-http://wso-hacks.googlecode.com/files/segment-create.png
