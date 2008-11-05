@@ -6,12 +6,14 @@ This article explains how to send relevant Google Website Optimizer (GWO) events
 
 = The code =
 
-There are two steps to complete:
+There are several steps to complete the integration, as follows:
 
   * Tag the experiment page.
-  * Create the custom segments in GA.
+  * Add a filter to your base profile(s) to remove GWO tracking.
+  * Create a new profile which will be your GWO tracking profile.
+  * Create the custom segments in this new profile.
 
-===Tag the experiment page===
+===1. Tag the experiment page===
 
 *If using ga.js*
 {{{
@@ -31,12 +33,8 @@ There are two steps to complete:
   var firstTracker = _gat._getTracker("UA-xxxxx-x");
   firstTracker._initData();
 
-  //Track the page view as normal.  
-  //If you are tracking pages in a common footer, you can skip this step.
-  firstTracker._trackPageview();
-
-  //Track the GWO test event, where 1234567890 is the experiment id.
-  firstTracker._trackPageview("/gwo/1234567890/test/" + gwoVar);
+  //Track the GWO test event, by appending special GWO values onto the original page URL 
+  firstTracker._trackPageview("/my/page.html" + "?gwo_exp=1234567890&gwo_var= + gwoVar);
 
   //Get the pageTracker for your GWO account.
   var secondTracker = _gat._getTracker("UA-yyyyy-y");
@@ -65,13 +63,8 @@ There are two steps to complete:
   //Get _uacct for your primary GA account.
   _uacct = 'UA-xxxxx-x';
 
-  //Track the page view as normal.  
-  //If you are tracking pages in a common footer, you can skip this step.
-  urchinTracker();
-
-
-  //Track the GWO test event, where 1234567890 is the experiment id.
-  urchinTracker("/1234567890/test/" + utmx());
+  //Track the GWO test event, by appending special GWO values onto the original page URL 
+  urchinTracker("/my/page.html" + "?gwo_exp=1234567890&gwo_var= + gwoVar);
 
   //Get _uacct for your GWO account.
   _uacct = 'UA-yyyyy-y';
@@ -91,6 +84,20 @@ The {{{utmx()}}} function is responsible for returning the variant of the test t
 || {{{utmx("combination_string")}}} || Returns a string of the form "X-Y-Z" where the number of items separated by dashes is the count of the number of sections (1 in the case of an A/B experiment).  The numbers between the dashes are the numbers of the individual alternatives chose for each section.  The first number corresponds to the first section. ||
 
 In addition, undefined can also be returned by any of these functions.  This implies that the visitor is not participating in the experiment and should be shown default content.
+
+=== 2. Add a filter to your base profile(s) to remove GWO tracking.===
+
+As a result of the last step, in the content report, GA will report a different version of the same test page depending on the variation served by GWO.  In most cases, you will want to filter the parameters out of the traffic in your base profile.  Here is the process for doing that:
+
+  * Go to the settings for your base profile and add a filter.
+  * Create an Advanced Filter called "Remove GWO tracking parameters"
+  * In "Field A -> Extract A", select Request URI and {{{(^.*)(.gwo_exp.*)}}}
+  * In "Output To -> Constructor", select Request URI and {{{$A1}}}
+
+=== 3. Create a new profile which will be your GWO tracking profile.===
+
+
+
 
 *Additional Notes*
 
