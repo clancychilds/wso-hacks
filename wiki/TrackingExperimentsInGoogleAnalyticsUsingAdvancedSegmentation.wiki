@@ -8,10 +8,10 @@ This article explains how to send relevant Google Website Optimizer (GWO) events
 
 There are several steps to complete the integration, as follows:
 
-  * Tag the experiment page.
-  * Add a filter to your base profile(s) to remove GWO tracking.
-  * Create a new profile which will be your GWO tracking profile.
-  * Create the custom segments in this new profile.
+  # Add the GA / GWO tags to the test page.
+  # Add a filter to your base profile(s) to remove GWO tracking.
+  # Create a new profile which will be your GWO tracking profile.
+  # Create the custom segments in this new profile.
 
 ===1. Tag the experiment page===
 
