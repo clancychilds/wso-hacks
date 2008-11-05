@@ -1,19 +1,18 @@
-#summary How to segment GA reports by GWO experiment / version.
+#summary How to segment Google Analytics reports by Website Optimizer experiment / version.
 
 = Introduction =
 
-Add your content here.
-
+This article explains how to send relevant Google Website Optimizer (GWO) events to Google Analytics (GA).  Once these events are in GA, you can use Advanced Segmentation to gain deeper insight as to how the users of your website change their behavior as a function of the experiments you are running.
 
 = The code =
 
 There are two steps to complete:
 
   * Tag the experiment page.
+  * Tag the goal page.
   * Create the custom segments in GA.
 
 ===Tag the experiment page===
-
 
 *If using ga.js*
 {{{
@@ -22,14 +21,29 @@ There are two steps to complete:
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js ' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
+  //Pull the experiment variation - see notes in the article for options.
+  var gwoVar = utmx("combination-string");
+  if (!gwoVar) {
+    gwoVar = "stopped";
+  }
+
+  //Get the pageTracker for your primary GA account.
   var firstTracker = _gat._getTracker("UA-xxxxx-x");
   firstTracker._initData();
-  firstTracker._trackPageview();
-  firstTracker._trackPageview("/zzzzzzzzzz/zzzz/" + utmx());
 
+  //Track the page view as normal.  
+  //If you are tracking pages in a common footer, you can skip this step.
+  firstTracker._trackPageview();
+
+  //Track the GWO test event, where 1234567890 is the experiment id.
+  firstTracker._trackPageview("/gwo/1234567890/test/" + gwoVar);
+
+  //Get the pageTracker for your GWO account.
   var secondTracker = _gat._getTracker("UA-yyyyy-y");
   secondTracker._initData();
-  secondTracker._trackPageview("/zzzzzzzzzz/zzzz");
+
+  //Track the GWO test event, where 1234567890 is the experiment id.
+  secondTracker._trackPageview("/1234567890/test");
 </script>
 }}} 
 
@@ -41,11 +55,21 @@ There are two steps to complete:
 '.google-analytics.com/urchin.js'+'"></sc'+'ript>')
 </script>
 <script>
+  //Get _uacct for your primary GA account.
   _uacct = 'UA-xxxxx-x';
+
+  //Track the page view as normal.  
+  //If you are tracking pages in a common footer, you can skip this step.
   urchinTracker();
+
+
+  //Track the GWO test event, where 1234567890 is the experiment id.
   urchinTracker("/zzzzzzzzzz/zzzz/" + utmx());
 
+  //Get _uacct for your GWO account.
   _uacct = 'UA-yyyyy-y';
+
+  //Track the GWO test event, where 1234567890 is the experiment id.
   urchinTracker("/zzzzzzzzzz/zzzz/");
 </script>
 }}}
