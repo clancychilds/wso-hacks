@@ -86,7 +86,7 @@ There are two steps to complete:
 The {{{utmx()}}} function is responsible for returning the variant of the test that the current visitor is seeing.  The output can be customised as described in the table.
 
 || *Function* || *Description* ||
-|| {{{utmx("variation_number","section-name")}}} || Returns the number of the variation.  If the original was selected for this section, the 0 will be returned.  Otherwise, number 1 will be returned if the first alternative was selected for this section (MV or A/B).  Note that the section name for an A/B experiment is "A/B". ||
+|| {{{utmx("variation_number","section_name")}}} || Returns the number of the variation.  If the original was selected for this section, the 0 will be returned.  Otherwise, number 1 will be returned if the first alternative was selected for this section (MV or A/B).  Note that the section name for an A/B experiment is "A/B". ||
 || {{{utmx("combination")}}} || Returns the combination number selected for this visitor to the experiment.  This number is between 0 and N-1 inclusively, and will correspond with the combination numbers from the GWO front end. ||
 || {{{utmx("combination_string")}}} || Returns a string of the form "X-Y-Z" where the number of items separated by dashes is the count of the number of sections (1 in the case of an A/B experiment).  The numbers between the dashes are the numbers of the individual alternatives chose for each section.  The first number corresponds to the first section. ||
 
