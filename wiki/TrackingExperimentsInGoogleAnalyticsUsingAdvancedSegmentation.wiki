@@ -85,6 +85,16 @@ The {{{utmx()}}} function is responsible for returning the variant of the test t
 
 In addition, undefined can also be returned by any of these functions.  This implies that the visitor is not participating in the experiment and should be shown default content.
 
+*Additional Notes*
+
+These tags will add additional information to the page URL which essentially log relevant Website Optimizer events which have occurred on the page.  The following table explains the events which are captured.
+
+|| *Page* || *Description* ||
+|| {{{/my/page.html?gwo_exp=1234567890&gwo_var=inactive}}} ||A visit to the test page by a visitor who is not participating in the experiment.  N.B. They will have seen the original content.||
+|| {{{/my/page.html?gwo_exp=1234567890&gwo_var=0}}} ||A visit to the test page by a visitor who is participating in the experiment and saw the original content.||
+|| {{{/my/page.html?gwo_exp=1234567890&gwo_var=1}}} ||A visit to the test page by a visitor who is participating in the experiment and saw combination 1.||
+|| {{{/my/page.html?gwo_exp=1234567890&gwo_var=2}}} ||A visit to the test page by a visitor who is participating in the experiment and saw combination 2 etc...||
+
 === 2. Add a filter to your base profile(s) to remove GWO tracking.===
 
 As a result of the last step, in the content report, GA will report a different version of the same test page depending on the variation served by GWO.  In most cases, you will want to filter the parameters out of the traffic in your base profile.  Here is the process for doing that:
@@ -96,22 +106,15 @@ As a result of the last step, in the content report, GA will report a different 
 
 === 3. Create a new profile which will be your GWO tracking profile.===
 
+Now, lets create a new profile which will be used for GWO reporting.  Here are the steps:
 
+  * From the Analytics settings page, create a new profile.
+  * Create the profile for the existing domain and call it "GWO reporting profile".
+  * Make sure you add back in filters which are required for your data to make sense.
 
+=== 4. Create the segments===
 
-*Additional Notes*
-
-These tags will add additional page views into your content report.  These page views essentially log relevant Website Optimizer events which occurred during the visitor's session.  The following table explains the events which are captured.
-
-|| *Page* || *Description* ||
-|| {{{/gwo/1234567890/test/inactive}}} ||A visit to the test page by a visitor who is not participating in the experiment.  N.B. They will have seen the original content.||
-|| {{{/gwo/1234567890/test/0}}} ||A visit to the test page by a visitor who is participating in the experiment and saw the original content.||
-|| {{{/gwo/1234567890/test/1}}} ||A visit to the test page by a visitor who is participating in the experiment and saw combination 1.||
-|| {{{/gwo/1234567890/test/2}}} ||A visit to the test page by a visitor who is participating in the experiment and saw combination 2 etc...||
-
-==Create the segments===
-
-Once the GWO events have been logged in GA, you should create custom segments for each event you are interested in reporting against.  You can then segment your GA reports to find out how visitor behavoir changed as a function of the experiment variation they were shown.  The steps are as follows:
+Once the GWO events are being logged in your new GA profile, you should create custom segments for each event you are interested in reporting against.  You can then segment your GA reports to find out how visitor behavoir changed as a function of the experiment variation they were shown.  The steps are as follows:
 
   * Create a new custom segment.
   * Choose dimension: Page.
