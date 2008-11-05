@@ -50,7 +50,7 @@ There are two steps to complete:
 </script>
 }}}
 
-These tags will add additional page views into your content report.  The following tables describes the new entries.
+These tags will add additional page views into your content report.  These page views essentially log relevant Website Optimizer events which occurred during the user's session.  The following table explains the events which are captured.
 
 *For A/B experiments, or MV experiments with 1 section*
 
@@ -78,4 +78,6 @@ These tags will add additional page views into your content report.  The followi
 
 ==Create the segments===
 
-Once you have these additional page views in Google Analytics, it is possible to create custom segments.  Custom segments allow you to view your core reports, broken down by sessions which have included a Website Optimizer test.
+Once you have these additional page views in Google Analytics, it is possible to create custom segments.  Custom segments allow you to view your core reports, broken down by sessions which have included a Website Optimizer test.  Use the tool to create a segment for every Website Optimizer event you wish to track.  The image below explains the process.
+
+http://wso-hacks.googlecode.com/files/segment-create.png
