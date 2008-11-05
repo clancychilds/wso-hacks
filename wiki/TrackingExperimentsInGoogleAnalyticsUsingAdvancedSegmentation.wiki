@@ -21,6 +21,7 @@ There are two steps to complete:
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js ' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
+
   //Pull the experiment variation - see notes in the article for options.
   var gwoVar = utmx("combination-string");
   if (!gwoVar) {
@@ -55,6 +56,13 @@ There are two steps to complete:
 '.google-analytics.com/urchin.js'+'"></sc'+'ript>')
 </script>
 <script>
+
+  //Pull the experiment variation - see notes in the article for options.
+  var gwoVar = utmx("combination-string");
+  if (!gwoVar) {
+    gwoVar = "stopped";
+  }
+
   //Get _uacct for your primary GA account.
   _uacct = 'UA-xxxxx-x';
 
