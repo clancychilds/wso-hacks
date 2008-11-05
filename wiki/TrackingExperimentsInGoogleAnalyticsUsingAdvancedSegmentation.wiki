@@ -52,15 +52,13 @@ There are two steps to complete:
 
 These tags will add additional page views into your content report.  The following table describes the events.
 
-||Page||Description||
-||/1234567890/test/||A visit to the test page with the test disabled||
-||/1234567890/test/0-0-0||A visit to the test page with original content||
-||/1234567890/test/0-1-1||A visit to the test page with original content||
-||/1234567890/test/0-1-1||A visit to the test page with original content||
+||*Experiment type*||*Page*||*Description*||
+||A/B or MV with 1 section||/1234567890/test/||A visit to the test page with the test stopped or paused||
+||A/B or MV with 1 section||/1234567890/test/0||A visit to the test page with original content||
+||A/B or MV with 1 section||/1234567890/test/1||A visit to the test page with variation 1||
+||A/B or MV with 1 section||/1234567890/test/2||A visit to the test page with variation 2||
 
 
 
 
 ===Create the segments===
-
-
