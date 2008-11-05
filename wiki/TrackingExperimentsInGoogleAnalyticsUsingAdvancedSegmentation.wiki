@@ -9,7 +9,6 @@ This article explains how to send relevant Google Website Optimizer (GWO) events
 There are two steps to complete:
 
   * Tag the experiment page.
-  * Tag the goal page.
   * Create the custom segments in GA.
 
 ===Tag the experiment page===
@@ -23,9 +22,9 @@ There are two steps to complete:
 <script type="text/javascript">
 
   //Pull the experiment variation - see notes in the article for options.
-  var gwoVar = utmx("combination-string");
+  var gwoVar = utmx("combination");
   if (!gwoVar) {
-    gwoVar = "stopped";
+    gwoVar = "inactive";
   }
 
   //Get the pageTracker for your primary GA account.
@@ -58,9 +57,9 @@ There are two steps to complete:
 <script>
 
   //Pull the experiment variation - see notes in the article for options.
-  var gwoVar = utmx("combination-string");
+  var gwoVar = utmx("combination");
   if (!gwoVar) {
-    gwoVar = "stopped";
+    gwoVar = "inactive";
   }
 
   //Get _uacct for your primary GA account.
@@ -72,44 +71,47 @@ There are two steps to complete:
 
 
   //Track the GWO test event, where 1234567890 is the experiment id.
-  urchinTracker("/zzzzzzzzzz/zzzz/" + utmx());
+  urchinTracker("/1234567890/test/" + utmx());
 
   //Get _uacct for your GWO account.
   _uacct = 'UA-yyyyy-y';
 
   //Track the GWO test event, where 1234567890 is the experiment id.
-  urchinTracker("/zzzzzzzzzz/zzzz/");
+  urchinTracker("/1234567890/test/");
 </script>
 }}}
 
-These tags will add additional page views into your content report.  These page views essentially log relevant Website Optimizer events which occurred during the user's session.  The following table explains the events which are captured.
+*Implemention Options*
 
-*For A/B experiments, or MV experiments with 1 section*
+The {{{utmx()}}} function is responsible for returning the variant of the test that the current visitor is seeing.  The output can be customised as described in the table.
 
-||*Page*||*Description*||
-||/1234567890/test/||A visit to the test page with the test stopped or paused||
-||/1234567890/test/0||A visit to the test page with original content||
-||/1234567890/test/1||A visit to the test page with variation 1||
-||/1234567890/test/2||A visit to the test page with variation 2 etc...||
-||/1234567890/goal/||A visit to the goal page with the test stopped or paused||
-||/1234567890/goal/0||A visit to the goal page with original content||
-||/1234567890/goal/1||A visit to the goal page with variation 1||
-||/1234567890/goal/2||A visit to the goal page with variation 2 etc...||
+|| *Function* || *Description* ||
+|| utmx("variation_number", "section-name") || Returns the number of the variation.  If the original was selected for this section, the 0 will be returned.  Otherwise, number 1 will be returned if the first alternative was selected for this section (MV or A/B).  Note that the section name for an A/B experiment is "A/B". ||
+|| utmx("combination") || Returns the combination number selected for this visitor to the experiment.  This number is between 0 and N-1 inclusively, and will correspond with the combination numbers from the GWO front end. ||
+|| utmx("combination_string") || Returns a string of the form "X-Y-Z" where the number of items separated by dashes is the count of the number of sections (1 in the case of an A/B experiment).  The numbers between the dashes are the numbers of the individual alternatives chose for each section.  The first number corresponds to the first section. ||
 
-*For MV experiments with more than 1 section*
+In addition, undefined can also be returned by any of these functions.  This implies that the visitor is not participating in the experiment and should be shown default content.
 
-||*Page*||*Description*||
-||/1234567890/test/||A visit to the test page with the test stopped or paused||
-||/1234567890/test/0-0-0||A visit to the test page with original content||
-||/1234567890/test/1-0-0||A visit to the test page with variation 1 of section 1, the original of section 2 and the original of section 3||
-||/1234567890/test/2-1-3||A visit to the test page with variation 2 of section 1, variation 2 of section 2 and variation 3 of section 3 etc...||
-||/1234567890/goal/||A visit to the goal page with the test stopped or paused||
-||/1234567890/goal/0-0-0||A visit to the goal page with original content||
-||/1234567890/goal/1-0-0||A visit to the goal page with variation 1 of section 1, the original of section 2 and the original of section 3||
-||/1234567890/goal/2-1-3||A visit to the goal page with variation 2 of section 1, variation 2 of section 2 and variation 3 of section 3 etc...||
+*Additional Notes*
+
+These tags will add additional page views into your content report.  These page views essentially log relevant Website Optimizer events which occurred during the visitor's session.  The following table explains the events which are captured.
+
+|| *Page* || *Description* ||
+||/gwo/1234567890/test/inactive||A visit to the test page by a visitor who is not participating in the experiment.  N.B. They will have seen the original content.||
+||/gwo/1234567890/test/0||A visit to the test page by a visitor who is participating in the experiment and saw the original content.||
+||/gwo/1234567890/test/1||A visit to the test page by a visitor who is participating in the experiment and saw combination 1.||
+||/gwo/1234567890/test/2||A visit to the test page by a visitor who is participating in the experiment and saw combination 2 etc...||
 
 ==Create the segments===
 
-Once you have these additional page views in Google Analytics, it is possible to create custom segments.  Custom segments allow you to view your core reports, broken down by sessions which have included a Website Optimizer test.  Use the tool to create a segment for every Website Optimizer event you wish to track.  The image below explains the process.
+Once the GWO events have been logged in GA, you should create custom segments for each event you are interested in reporting against.  You can then segment your GA reports to find out how visitor behavoir changed as a function of the experiment variation they were shown.  The steps are as follows:
+
+  * Create a new custom segment.
+  * Choose dimension: Page.
+  * Enter the appropriate value: e.g. {{{/gwo/1234567890/test/0}}}
+  * Give it a descriptive name: e.g. {{{My Experiment : Original}}}
+  * Save, and you are done!
+
+The image below describes the process.
 
 http://wso-hacks.googlecode.com/files/segment-create.png
