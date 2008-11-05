@@ -104,6 +104,8 @@ As a result of the last step, in the content report, GA will report a different 
   * In "Field A -> Extract A", select Request URI and {{{(^.*)(.gwo_exp.*)}}}
   * In "Output To -> Constructor", select Request URI and {{{$A1}}}
 
+Now repeat for any additional profiles you want to filter.
+
 === 3. Create a new profile which will be your GWO tracking profile.===
 
 Now, lets create a new profile which will be used for GWO reporting.  Here are the steps:
