@@ -7,7 +7,7 @@ function control_script(rules, key) {
 	if (rule != null) {
 		var experiment = rule.experiment;
 		var type = rule.type;	
-		if (type="MV") {
+		if (type == "MV") {
 			(function(){var k=experiment,d=document,l=d.location,c=d.cookie;function f(n){
 			if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return c.substring(i+n.
 			length+1,j<0?c.length:j)}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
@@ -17,7 +17,7 @@ function control_script(rules, key) {
 			+new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 			'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
 		}
-		else if (type="AB") {
+		else if (type == "AB") {
 			(function(){var k=experiment,d=document,l=d.location,c=d.cookie;function f(n){
 			if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return c.substring(i+n.
 			length+1,j<0?c.length:j)}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
@@ -25,7 +25,8 @@ function control_script(rules, key) {
 			'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'
 			+'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
 			+new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-			'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();	
+			'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
+			utmx("url",'A/B');
 		}
 	}
 }
@@ -39,12 +40,11 @@ function tracker_script(rules, key) {
 	if (rule != null) {
 		var experiment = rule.experiment;
 		var uacct = rule.uacct;
-		if(typeof(urchinTracker)!='function')document.write('<sc'+'ript src="'+
-		'http'+(document.location.protocol=='https:'?'s://ssl':'://www')+
-		'.google-analytics.com/urchin.js'+'"></sc'+'ript>');
+		if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
+		(document.location.protocol=='https:'?'s://ssl':'://www')+
+		'.google-analytics.com/ga.js"></sc'+'ript>');
 
-		document.write('<sc'+'ript>' + '_uacct = "' + uacct + 
-		'";urchinTracker("/' + rule.experiment +'/test");' + '</sc'+'ript>');
+		document.write('<sc'+'ript> ' + 'try { var pageTracker=_gat._getTracker(\"' + uacct + '\"); pageTracker._trackPageview(\"/' + experiment + '/test\"); }catch(err){} ' + '</sc'+'ript>');
 	}
 }
 
